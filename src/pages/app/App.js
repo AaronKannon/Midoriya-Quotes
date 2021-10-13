@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import dekuImg from '../../images/deku.png';
+import { Quotes } from '../../components';
 
 export function App() {
   return (
     <Content>
-      <p>quote xpto - Speaker</p>
-      <button>Quote Smash!!</button>
+      <Quotes quote={'ok'} speaker={'Speaker'}/>
       <DekuImg src={dekuImg} alt="Midoriya Izuku Full Cowling" />
     </Content>
   );
