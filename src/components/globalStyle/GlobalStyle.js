@@ -14,5 +14,6 @@ export const GlobalStyle = createGlobalStyle `
     padding: 0;
     margin: 0;
     font-family: 'Futura Display', serif;
+    text-shadow: -1px 1px 0 #fff, 1px 1px 0 #fff, 1px -1px 0 #fff, -1px -1px 0 #fff;
   }
 `;

@@ -1,11 +1,31 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import dekuImg from '../../images/deku.png';
 import { Quotes } from '../../components';
+import { getQuote } from '../../services';
 
 export function App() {
+  const [quoteState, setQuoteState] = useState({ quote: 'ok', speaker: 'Speaker'});
+
+  const getRandom = (max) => {
+    return Math.floor(Math.random() * max);
+  }
+
+  const getSingleQuote = async () => {
+    const quotes = await getQuote();
+    console.log('Quotes: '+ quotes);
+    return quotes[getRandom(quotes.length)];
+  };
+
+  const onUpdate = async () => {
+    const quote = await getSingleQuote();
+    console.log('Quote: '+ quote);
+    setQuoteState(quote);
+ };
+
   return (
     <Content>
-      <Quotes quote={'ok'} speaker={'Speaker'}/>
+      <Quotes {...quoteState} onUpdate={onUpdate} />
       <DekuImg src={dekuImg} alt="Midoriya Izuku Full Cowling" />
     </Content>
   );
