@@ -5,6 +5,7 @@ import { toBeInTheDocument } from '@testing-library/jest-dom'
 import { App } from "./App";
 
 const response = [{ id: 0, speaker: 'Speaker', quote: 'test quote' }];
+//const response = { id: 0, speaker: 'Speaker', quote: 'test quote' };
 
 const server = setupServer(
     rest.get(process.env.REACT_APP_API, (req, res, ctx) => {
@@ -21,7 +22,7 @@ test('renders the app with a button', () => {
 
     const buttonEl = screen.getByRole('button');
     const imageEl = screen.getByRole('img');
-    const textEl = screen.getByText(/Speaker/);
+    const textEl = screen.getByText(/loading speaker/);
 
     expect(buttonEl).toBeInTheDocument();
     expect(imageEl).toBeInTheDocument();
@@ -33,6 +34,14 @@ test('calls api on button click and update its text', async () => {
 
     const buttonEl = screen.getByRole('button');
     fireEvent.click(buttonEl);
+
+    const quoteEl = await screen.findByText(response[0].quote);
+
+    expect(quoteEl).toBeInTheDocument();
+});
+
+test('calls api on startup and rends it response', async () => {
+    render( < App /> );
 
     const quoteEl = await screen.findByText(response[0].quote);
 
